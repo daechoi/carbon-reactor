@@ -1,0 +1,22 @@
+# Stage 1 - the build process
+FROM node:14.15.4-alpine as builder
+
+WORKDIR /app
+
+# ENV PATH /app/node_modules/.bin:$PATH
+# Want to separate dependency installation from the actual edits to our source files
+
+COPY package.json ./
+COPY yarn.lock ./
+
+RUN yarn 
+
+# add .dockerignore to avoid copying entire current directory
+COPY . ./
+
+RUN npm run build
+
+FROM nginx:stable-alpine
+COPY --from=builder /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
