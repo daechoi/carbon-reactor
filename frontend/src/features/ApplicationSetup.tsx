@@ -1,49 +1,49 @@
-import { useState } from 'react'
-import Cookies from 'js-cookie'
+import { useEffect, useState } from 'react'
+//import Cookies from 'js-cookie'
 
-interface ICsrfToken {
-  csrftoken: string
-}
-
-type Props = {
+type IProps = {
   children: React.ReactNode
 }
 
-type State = {
-  csrftoken: string | null
+type ICsrfState = {
+  csrftoken: string | undefined
   hasError: boolean
   shouldBatch?: boolean
 }
 
-const ApplicationSetup = (Props, State) => {
-  const [csrfToken, setCsrfToken] = useState<ICsrfToken | undefined>(undefined)
+const API_KEY = 'GI5P6HGG1PP7DX0S'
 
-  const getCsrfToken = () => {
-    fetch(process.env.REACT_APP_CSRF_URL || 'http://localhost:8001/csrf', {
-      mode: 'cors',
-      credentials: 'include',
-    }).then((response) => {
-      if (response.ok) {
-        setCsrfToken({
-          csrftoken: Cookies.get('csrf'),
-        })
-        return response.json()
-      }
-    })
-  }
-  //     mode: 'cors',
-  //     credentials: 'include',
-  //   }).then((success => {
-  //     setCsrfToken({csrftoken: Cookies.get('csrftoken')})
-  //   });
-  //   return success.json()
-  // }, failure => {
-  //   console.error('Failed to set CSRF Token', failure);
-  //   setCsrfToken({hasError: true, csrftoken: null});
-  //   logToSentry(failure);
-  //   return { enable_gql_batching: null };
-  // }).then( res =>{
-  //   const shouldBatch:
-  // } )
-  //
+const URL = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=BB&interval=1min&apikey=${API_KEY}`
+
+const getCsrfToken = () =>
+  //  fetch(process.env.REACT_APP_CSRF_URL || 'http://localhost:8001/csrf', {
+  //    mode: 'cors',
+  //    credentials: 'include',
+  //  })
+  new Promise<ICsrfState>((resolve) =>
+    setTimeout(() => resolve({ csrftoken: 'wasabi', hasError: false }), 2000)
+  ) // two seconds
+
+const ApplicationSetup = ({ ...props }: IProps) => {
+  const [csrfToken, setCsrfToken] = useState<ICsrfState | undefined>(undefined)
+
+  // similar to componentdidMount/componentDidUpdate
+  useEffect(() => {
+    getCsrfToken().then((result) => setCsrfToken(result))
+  })
+
+  return (
+    <>
+      {csrfToken && !csrfToken?.hasError ? (
+        <>
+          <p> {csrfToken.csrftoken} </p> {props.children}{' '}
+        </>
+      ) : (
+        <h1> Not initialized </h1>
+      )}
+      fetching from: {URL}
+    </>
+  )
 }
+
+export default ApplicationSetup

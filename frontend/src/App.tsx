@@ -1,11 +1,13 @@
 import React from 'react'
 import './App.css'
-import HelloWorld from './HelloWorld'
+import ApplicationSetup from './features/ApplicationSetup'
 
 function App() {
   return (
     <div className="App">
-      <HelloWorld />
+      <ApplicationSetup>
+        <h2>This is the prop to be sent</h2>
+      </ApplicationSetup>
     </div>
   )
 }
