@@ -5,6 +5,16 @@ interface ICsrfToken {
   csrftoken: string
 }
 
+type Props = {
+  children: React.ReactNode
+}
+
+type State = {
+  csrftoken: string | null
+  hasError: boolean
+  shouldBatch?: boolean
+}
+
 const ApplicationSetup = (Props, State) => {
   const [csrfToken, setCsrfToken] = useState<ICsrfToken | undefined>(undefined)
 
