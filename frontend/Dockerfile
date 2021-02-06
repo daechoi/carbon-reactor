@@ -13,6 +13,5 @@ RUN yarn
 
 # add .dockerignore to avoid copying entire current directory
 COPY . ./
-
 # start app
 CMD ["yarn", "start"]

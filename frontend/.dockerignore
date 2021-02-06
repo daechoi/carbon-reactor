@@ -7,3 +7,5 @@ build
 Dockerfile
 Dockerfile.prod
 **/node_modules
+
+.env*

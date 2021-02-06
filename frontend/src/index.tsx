@@ -1,8 +1,11 @@
 import React from 'react'
 import { render } from 'react-dom'
-import './index.css'
-import App from './App'
+import './index.scss'
+import App from './components/App'
 import reportWebVitals from './reportWebVitals'
+import { setupLog } from './utils'
+
+setupLog()
 
 render(
   <React.StrictMode>

@@ -8,3 +8,5 @@ services:
       dockerfile: Dockerfile.prod
     ports:
       - 8877:80
+    environment:
+      - DOCKER_ENV=production
