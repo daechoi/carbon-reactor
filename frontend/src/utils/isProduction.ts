@@ -1,11 +1,7 @@
 const NODE_ENV = process.env.NODE_ENV
 const production = 'production'
+const staging = 'staging'
 
-export function isProduction(): boolean {
-  return NODE_ENV === production
-}
+export const isProduction = NODE_ENV === production
 
-export function isStaging(): boolean {
-  const staging = 'staging'
-  return process.env.REACT_APP_ENV === staging && !isProduction() 
-}
+export const isStaging  = process.env.REACT_APP_ENV === staging && !isProduction

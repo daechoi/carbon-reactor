@@ -17,7 +17,7 @@ export const setupLog = () => {
   } = process.env
 
   isDefined(errors, 'NODE_ENV', NODE_ENV)
-  if (isProduction() || isStaging()) {
+  if (isProduction || isStaging) {
 
     isDefined(errors, 'REACT_APP_SENTRY_TRACE_SAMPLE_RATE', REACT_APP_SENTRY_TRACE_SAMPLE_RATE)
     isDefined(errors, 'REACT_APP_SENTRY_PUBLIC_DSN', REACT_APP_SENTRY_PUBLIC_DSN)
@@ -28,7 +28,7 @@ export const setupLog = () => {
       dsn: REACT_APP_SENTRY_PUBLIC_DSN,
       integrations: [new Integrations.BrowserTracing()],
       release: REACT_APP_NAME + '@' + REACT_APP_VERSION,
-      environment: isStaging() ? 'staging' : isProduction() ? 'production' : 'development',
+      environment: isStaging ? 'staging' : isProduction ? 'production' : 'development',
       tracesSampleRate: parseInt(REACT_APP_SENTRY_TRACE_SAMPLE_RATE || '0'), // recommend adjusting in production
     })
 
@@ -58,5 +58,5 @@ export const setupLog = () => {
 }
 
 export const logMessage = (message: string) => {
-  isProduction() || isStaging() ? Sentry.captureMessage(message) : console.log(message)
+  isProduction || isStaging ? Sentry.captureMessage(message) : console.log(message)
 }
