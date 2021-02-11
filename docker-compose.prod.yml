@@ -10,3 +10,5 @@ services:
       - 8877:80
     environment:
       - DOCKER_ENV=production
+    env_file:
+      - ./frontend/.env.production
