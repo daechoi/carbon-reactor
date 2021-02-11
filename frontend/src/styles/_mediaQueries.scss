@@ -1,0 +1,9 @@
+$breakpoints: (
+  narrow: 400px,
+  mid: 700px,
+  wide: 1000px
+);
+
+$narrowBp: 'only screen and (min-width: #{map-get($breakpoints, narrow)})';
+$midBp: 'only screen and (min-width: #{map-get($breakpoints, mid)})';
+$wideBp: 'only screen and (min-width: #{map-get($breakpoints, wide)})';

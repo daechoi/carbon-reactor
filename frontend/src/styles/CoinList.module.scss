@@ -1,0 +1,33 @@
+/**
+ * CoinList
+ * ----------------
+ */
+
+@import './_mediaQueries.scss';
+@import './_variables.scss';
+
+.coinsListWrapper {
+  margin-top: calc(#{$headerHeight} + #{$totalsHeight});
+  padding: 20px;
+  transition: margin-left 350ms;
+}
+
+.coinsListWrapper__spacingLeft {
+  @media #{$midBp} {
+    margin-left: $menuWidth;
+  }
+}
+
+.coinsList_fieldset {
+  border: none;
+  padding: 0;
+}
+
+.coinList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,30 @@
+/**
+ * Filters
+ * ----------------
+ */
+
+@import './_colors.scss';
+
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.label {
+    background-color: $grey_light;
+    border-radius: 3px;
+    display: inline-block;
+    flex-basis: 100%;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    padding: 10px;
+
+    &:hover {
+      background-color: $grey_darkest;
+      cursor: pointer;
+    }
+}
+
+    .label__selected {
+        background-color: $grey_darkest;
+    }

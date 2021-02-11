@@ -1,0 +1,39 @@
+/**
+ * Header
+ * ----------------
+ */
+
+@import './_colors.scss';
+@import './_variables.scss';
+
+.header {
+  align-items: center;
+  background-color: $grey_darkest;
+  display: flex;
+  height: $headerHeight;
+  justify-content: space-between;
+  padding: 20px;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.siteTitle {
+  font-size: 2rem;
+  font-style: italic;
+  font-weight: bold;
+  margin: 0 10px;
+}
+
+.userWrapper {
+  align-items: center;
+  display: flex
+}
+
+.userAvatar {
+  border-radius: 50%;
+  display: none;
+  width: 50px;
+}

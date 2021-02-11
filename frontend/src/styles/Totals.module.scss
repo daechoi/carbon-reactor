@@ -1,0 +1,30 @@
+/**
+ * Totals
+ * ----------------
+ */
+
+@import './_mediaQueries.scss';
+@import './_colors.scss';
+@import './_variables.scss';
+
+.totals {
+  align-items: center;
+  background-color: $grey_light;
+  display: flex;
+  flex-direction: column;
+  height: $totalsHeight;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: fixed;
+  top: $headerHeight;
+  width: 100%;
+  z-index: 1;
+
+  @media #{$narrowBp} {
+    flex-direction: row;
+  }
+}
+
+.text {
+  margin: 0
+}

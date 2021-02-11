@@ -1,0 +1,48 @@
+/**
+ * Menu
+ * ----------------
+ */
+
+@import './_mediaQueries.scss';
+@import './_colors.scss';
+@import './_variables.scss';
+
+.menu {
+    background-color: $grey;
+    bottom: 0;
+    left: -9999px;
+    list-style: none;
+    margin: 0;
+    overflow: auto;
+    right: auto;
+    padding: 20px;
+    position: fixed;
+    top: calc(#{$headerHeight} + #{$totalsHeight});
+    transition: margin-left 350ms;
+    z-index: 2;
+
+    @media #{$midBp} {
+        border-right: solid 5px $grey_light;
+        left: 0;
+        margin-left: calc(#{$menuWidth} - (#{$menuWidth} * 2));
+        width: $menuWidth;
+    }
+}
+
+    .menu__open {
+        left: 0;
+        right: 0;
+
+        @media #{$midBp} {
+            margin-left: 0;
+        }
+    }
+
+    .menu_item {
+        margin-bottom: 20px;
+    }
+
+    .menu_heading {
+        font-size: 1.4rem;
+        margin-bottom:  10px;
+    }

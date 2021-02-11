@@ -1,0 +1,95 @@
+/**
+ * Coin
+ * ----------------
+ */
+
+@import './_mediaQueries.scss';
+@import './_colors.scss';
+
+@mixin active-coin($color, $backgroundColor, $borderColor) {
+  color: $color;
+  background-color: $backgroundColor;
+  border: solid 3px $borderColor;
+}
+
+.coin {
+    @include active-coin($grey_lightest, $grey, $grey_light);
+    border-radius: 3px;
+    flex-grow: 0;
+    flex-basis: 45%;
+    margin-bottom: 20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+
+    &:hover {
+      @include active-coin($white, $grey_light, $grey_light);
+    }
+
+    @media #{$narrowBp} {
+      flex-basis: 30%;
+    }
+
+    @media #{$midBp} {
+      flex-basis: 22%;
+    }
+
+    @media #{$wideBp} {
+      flex-basis: 15%;
+    }
+}
+
+  .coin__loaded {
+    opacity: 1;
+  }
+
+  .coin__owned {
+      @include active-coin($grey_lightest, $grey, $green);
+
+      &:hover {
+        @include active-coin($white, $grey_light, $green);
+      }
+  }
+
+
+.tick {
+  left: 10px;
+  position: absolute;
+  top: 10px;
+  width: 20px;
+
+  @media #{$midBp} {
+    width: 40px;
+  }
+}
+
+.image {
+  border: solid 3px $grey_light;
+  border-radius: 50%;
+  display: block;
+  margin: 10px auto;
+  max-width: 150px;
+  width: 70%;
+
+  @media #{$midBp} {
+    margin-bottom: 30px;
+    margin-top: 30px;
+  }
+
+  .coin__owned & {
+    border-color: $green;
+  }
+}
+
+.label {
+  display: block;
+  padding: 10px;
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.input {
+  display: none;
+}
