@@ -5,11 +5,10 @@ import { Navbar } from './Navbar'
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <Navbar>
-        <div>
-          <h1>Domanic</h1>
-        </div>
-      </Navbar>
+      <Navbar />
+      <main>
+        This is a research management application to track internal sentiment, time-line, and alerts.
+      </main>
     </BrowserRouter>
   )
 }
