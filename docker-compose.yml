@@ -16,3 +16,16 @@ services:
       - PORT=4000
     env_file:
       - ./frontend/.env.staging
+
+  db:
+    image: postgres
+    env_file:
+      - ./services/.env.production
+    ports:
+      - "5433:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./db/:/docker-entrypoint-initdb.d/
+
+volumes:
+  db-data:
