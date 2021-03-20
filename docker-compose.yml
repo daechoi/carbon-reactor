@@ -26,6 +26,20 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
       - ./db/:/docker-entrypoint-initdb.d/
+    networks:
+      - test_net
+
+  data_service:
+    build:
+      context: ./services
+      dockerfile: Dockerfile
+    networks:
+      - test_net
+    environment:
+      - environment=docker
 
 volumes:
   db-data:
+
+networks:
+  test_net:

@@ -4,7 +4,7 @@ import psycopg2
 
 class DBAcess:
     def __init__(self):
-        self.conn_str = f"host='localhost' dbname='{CONST.DB_NAME}' user='{CONST.DB_USER}' password='{CONST.DB_PASS}' port='{CONST.DB_PORT}'"
+        self.conn_str = f"host='{CONST.DB_HOST}' dbname='{CONST.DB_NAME}' user='{CONST.DB_USER}' password='{CONST.DB_PASS}' port='{CONST.DB_PORT}'"
 
     def _insert_cmd(self, sqlcmd, reader):
         sqlcmd = sqlcmd+ " ON CONFLICT DO NOTHING" # dedupe
