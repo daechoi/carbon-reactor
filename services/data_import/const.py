@@ -28,5 +28,7 @@ class Setting:
         self.DB_NAME = os.getenv("POSTGRES_DB","")
         self.DB_PORT = os.getenv("DB_PORT","")
 
+        self.FINHUB_API = os.getenv("FINHUB_API","")
+
 
 CONST = Setting()

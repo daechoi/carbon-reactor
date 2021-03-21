@@ -168,6 +168,10 @@ class TiblioScraper:
             raise Exception(f"Unable to check the {CONST.URL_NAKED_SHORTS}")
         self._load_long_calls_puts(resp.text, 'PUTS')
 
+    def load_earnings_report(self):
+#        resp = self.session.get(CONST.URL_)
+        # TODO: work on earnings report.  Should be very similar to long_calls_puts
+        pass
 
     
 def run(argv) -> None:
@@ -177,6 +181,9 @@ def run(argv) -> None:
         scraper.load_naked_shorts()
         scraper.load_long_calls()
         scraper.load_long_puts()
+        # TODO: put unittest automatically regression test upon save
+        # scraper.load_earnings_report()
+        # TODO: load market open schedule from somewhere and adjust the loading frequency.
         print("Sleeping for two minutes")
         time.sleep(120)
 

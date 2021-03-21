@@ -7,7 +7,7 @@ class DBAcess:
         self.conn_str = f"host='{CONST.DB_HOST}' dbname='{CONST.DB_NAME}' user='{CONST.DB_USER}' password='{CONST.DB_PASS}' port='{CONST.DB_PORT}'"
 
     def _insert_cmd(self, sqlcmd, reader):
-        sqlcmd = sqlcmd+ " ON CONFLICT DO NOTHING" # dedupe
+        sqlcmd = sqlcmd+ " ON CONFLICT DO NOTHING" # avoid duplicates
         with closing(psycopg2.connect(self.conn_str)) as conn, conn.cursor() as cur:
             rec_cnt = 0
             for row in reader:
