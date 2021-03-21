@@ -38,3 +38,5 @@ clean_volumes:
 	@make elapsed_time
 	@echo "All clean 🛀"
 
+shdb:
+	@docker exec -it $(docker ps | grep db | cut -d' ' -f1) /bin/bash
