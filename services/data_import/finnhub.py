@@ -13,10 +13,29 @@ import websocket
 import json
 from const import CONST
 
-symbols = ['tlry', 'rkt', 'out', 'amc', 'wkhs', 'siri', 'iag', 'srne']
+symbols = ['tlry', 'rkt', 'out', 'amc', 'wkhs', 'siri', 'iag', 'srne', 'BINANCE:BTCUSDT']
 
 def on_message(ws, message):
-    print("received: " + message)
+    # Look at the message type during the market open
+    # {type: ping}
+    # {"data":
+    # [
+    # {"c":null,"p":57733.37,"s":"BINANCE:BTCUSDT","t":1616396091995,"v":0.002135},
+    # {"c":null,"p":57733.37,"s":"BINANCE:BTCUSDT","t":1616396091995,"v":0.00218},
+    # {"c":null,"p":57733.37,"s":"BINANCE:BTCUSDT","t":1616396092049,"v":0.01155},
+    # {"c":null,"p":57735.62,"s":"BINANCE:BTCUSDT","t":1616396092049,"v":0.003651},
+    # {"c":null,"p":57735.64,"s":"BINANCE:BTCUSDT","t":1616396092049,"v":0.013429},
+    # {"c":null,"p":57736.38,"s":"BINANCE:BTCUSDT","t":1616396092089,"v":0.000468},{"c":null,"p":57736.38,"s":"BINANCE:BTCUSDT","t":1616396092115,"v":0.009987},{"c":null,"p":57736.38,"s":"BINANCE:BTCUSDT","t":1616396092145,"v":0.004421},{"c":null,"p":57736.38,"s":"BINANCE:BTCUSDT","t":1616396092150,"v":0.153067},{"c":null,"p":57736.38,"s":"BINANCE:BTCUSDT","t":1616396092171,"v":0.036148}],
+    # "type":"trade"}
+    msg = json.loads(message)
+    if msg["type"] == "trade":
+        for trade in msg["data"]:
+            # ok now I can publish to the kafka
+            if trade["v"] > 0.01:
+                print(f"ticker: {trade['s']}, last price: {trade['p']}, volume: {trade['v']}")
+    else:
+        print("received something else")
+        print(message)
 
 
 def on_error(ws, error):
