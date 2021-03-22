@@ -29,6 +29,7 @@ class Setting:
         self.DB_PORT = os.getenv("DB_PORT","")
 
         self.FINHUB_API = os.getenv("FINHUB_API","")
+        self.URL_FINNHUB_WS_API = os.getenv("URL_FINNHUB_WS_API","")
 
 
 CONST = Setting()

@@ -21,6 +21,11 @@ up:
 	@docker-compose up -d
 	@docker-compose logs --tail 10 -f
 
+backend:
+	@docker-compose up -d db
+	@docker-compose up -d data_service
+	@docker-compose logs --tail 10 -f
+
 down:
 	@docker-compose stop
 
