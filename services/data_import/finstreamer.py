@@ -40,8 +40,9 @@ class FinStreamer(threading.Thread):
         if msg["type"] == "trade":
             for trade in msg["data"]:
                 # ok now I can publish to the kafka
-                if trade["v"] > 0.01:
-                    print(f"ticker: {trade['s']}, last price: {trade['p']}, volume: {trade['v']}")
+#                if trade["v"] > 0.01:
+                print(f"ticker: {trade['s']}, last price: {trade['p']}, volume: {trade['v']}")
+
         else:
             print("received something else")
             print(message)
