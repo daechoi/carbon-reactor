@@ -12,6 +12,7 @@ class Setting:
             env_path = Path("..") / '.env.production'
 
         load_dotenv(dotenv_path=env_path)
+        load_dotenv(dotenv_path=Path("..") / 'env.kafka')
 
         self.TIBLIO_USER = os.getenv("username")
         self.TIBLIO_PASSWORD = os.getenv("password")
@@ -31,5 +32,10 @@ class Setting:
         self.FINHUB_API = os.getenv("FINHUB_API","")
         self.URL_FINNHUB_WS_API = os.getenv("URL_FINNHUB_WS_API","")
 
+        self.TOPIC_TRADES = os.getenv("TOPIC_TRADES")
+        self.TOPIC_SHORT_PUTS = os.getenv("TOPIC_SHORT_PUTS")
+        self.TOPIC_SHORT_CREDIT_SPREADS = os.getenv("TOPIC_SHORT_SHORT_CREDIT_SPREADS")
+        self.TOPIC_LONG_CALLS_PUTS = os.getenv("TOPIC_LONG_CALLS_PUTS")
+        self.TOPIC_EARNINGS_PLAYS = os.getenv("TOPIC_EARNINGS_PLAYS")
 
 CONST = Setting()

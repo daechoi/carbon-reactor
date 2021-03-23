@@ -159,3 +159,27 @@ I am going to do research on event stream processing now that I am getting incre
 I'll need to start sketching out the front-end of the carbon reactor.  Write documentation on the project.
 There are millions of website that gives out analytics on options.
 
+- Learn about influxdb and see if other types of timeseries database.  
+- Learn about grafana and react integration
+
+
+3.23.2021
+- Setup kafka as integration point for the streamer and tiblio and other signals.
+
+A. Tiblio will produce four topics:  short puts, long calls/puts, short credit spreads, earnings plays
+B. finstreamer will consume the tiblio topics, and produce 1 topic:  trades 
+C. InfluxDB will consume Tiblio and Finstreamer topics.
+  1. This I need to think about...
+  2. Option Strategy as the book says...selling options like an engineer.
+  3. Just the mechanics of Wheeling strategy...and see how that works by collecting premiums.
+
+Initial goal of this application is a private fund management tool.
+UI should have instrumentations based on Grafana/Prometheus (not sure what Prometheus will do...)
+But my goal for today is:
+1. Setting up Kafka Python consumer/producer
+2. Set up InfluxDB
+3. Docker Log Rotation
+
+Look at how threading work in python so I can handle peer reset connection errors more robustly.  <-- This could be handled by Kubernetes.
+It should give a good indication of probability of loss/profit.  Study autocorrelation for time series data.
+

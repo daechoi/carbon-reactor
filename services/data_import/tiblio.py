@@ -177,13 +177,17 @@ class TiblioScraper:
 def run(argv) -> None:
     scraper = TiblioScraper()
     while True:
-        scraper.load_short_spreads()
-        scraper.load_naked_shorts()
-        scraper.load_long_calls()
-        scraper.load_long_puts()
-        # TODO: put unittest automatically regression test upon save
-        # scraper.load_earnings_report()
-        # TODO: load market open schedule from somewhere and adjust the loading frequency.
+        try:
+            scraper.load_short_spreads()
+            scraper.load_naked_shorts()
+            scraper.load_long_calls()
+            scraper.load_long_puts()
+            # TODO: put unittest automatically regression test upon save
+            # scraper.load_earnings_report()
+            # TODO: load market open schedule from somewhere and adjust the loading frequency.
+        except Exception as e:
+            print(e)
+
         print("Sleeping for two minutes")
         time.sleep(120)
 

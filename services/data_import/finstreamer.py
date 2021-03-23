@@ -1,14 +1,20 @@
 import threading
 import json
+from kafka.consumer.group import KafkaConsumer
 import websocket
 from const import CONST
 import time
+from kafka import KafkaProducer
 
 class FinStreamer(threading.Thread):
     def __init__(self, symbols):
         threading.Thread.__init__(self)
         self.symbols = symbols
         self.daemon = True
+        self.producer = KafkaProducer(
+                value_serializer=lambda m: json.dumps(m).encode('utf-8'),
+                bootstrap_servers='localhost:9092'
+                )
 
     def run(self):
 
@@ -41,7 +47,9 @@ class FinStreamer(threading.Thread):
             for trade in msg["data"]:
                 # ok now I can publish to the kafka
 #                if trade["v"] > 0.01:
-                print(f"ticker: {trade['s']}, last price: {trade['p']}, volume: {trade['v']}")
+#                print(f"ticker: {trade['s']}, last price: {trade['p']}, volume: {trade['v']}, condition: {trade['c']}, timestamp: {trade['t']}")
+                self.producer.send(CONST.TOPIC_TRADES, value=trade)
+#                self.producer.flush()
 
         else:
             print("received something else")
@@ -49,6 +57,21 @@ class FinStreamer(threading.Thread):
 
     def on_error(self, ws, error):
         print (error)
+        if ws is not None:
+            self.stop()
+
+        while True:
+            try:
+                time.sleep(10)
+                if not self.is_alive():
+                    self.start()
+                else:
+                    self.stop()
+                    self.run()
+
+            except Exception as e:
+                print(f"Restart failed: {e}")
+
 
     def on_close(self, ws):
         print ('#### Closed connection ####')
@@ -65,16 +88,20 @@ class FinStreamer(threading.Thread):
 if __name__ == "__main__":
 
     # Reload the FinStreamer if the symbols change
-    symbols = ['tlry', 'rkt', 'out', 'amc', 'wkhs', 'siri', 'iag', 'srne', 'BINANCE:BTCUSDT']
+    symbols = ['TLRY', 'RKT', 'OUT', 'AMC', 'WKHS', 'SIRI', 'IAG', 'SRNE', 'EC', 'TSLA', 'GME', 'AAPL', 'BINANCE:BTCUSDT']
     iex = FinStreamer(symbols)
     iex.start()
-    while True:
-        time.sleep(60)
 
-#    while True:
-#        time.sleep(10)
-#        # check the kafka queue to see if tiblio uploaded new symbols
-#        iex.stop()
-#        iex = FinStreamer(symbols)
-#        iex.start()
-#
+    consumer = KafkaConsumer(
+            CONST.TOPIC_LONG_CALLS_PUTS,
+            value_deserializer=lambda m: json.loads(m.decode('utf-8')),
+            bootstrap_servers='localhost:9092'
+            )
+
+    for m in consumer:
+        print(f"Restarting with new interest {m}")
+        symbols = m.value
+        iex.stop()
+        time.sleep(1)
+        iex = FinStreamer(symbols)
+        iex.start()
