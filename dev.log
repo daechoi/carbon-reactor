@@ -183,3 +183,6 @@ But my goal for today is:
 Look at how threading work in python so I can handle peer reset connection errors more robustly.  <-- This could be handled by Kubernetes.
 It should give a good indication of probability of loss/profit.  Study autocorrelation for time series data.
 
+
+3.24.2021
+- Start work on frontend.  Need to create a websocket server to stream info from kafka topics to react frontend.
