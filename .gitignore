@@ -1,0 +1,4 @@
+00*.sh
+.env*
+*.keys.*
+**/__pycache__/**

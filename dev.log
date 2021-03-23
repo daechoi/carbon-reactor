@@ -1,0 +1,188 @@
+2.4.2021
+
+1. Add material design to style
+2. Structure the source code directory
+3. Add counter redux
+4. Review google firebase code with graphql
+
+done:
+
+Added DVR capability via LogRocket
+Added Sentry Logging
+Added environment var setup
+
+2.8.2021
+
+- Added testing capability with Jest
+- Learned about django framework
+
+2.9.2021
+
+- Netlify webserver instead of using nginx?  Unopinionated.  gatsby..cms.  Decouple frontend to backend
+
+Reference:  
+- I have no idea what to build.  So I'll get the inspiration from Coinsly
+- Look at https://medium.com/better-programming/how-to-integrate-django-react-app-with-stripe-payments-95709b3f23e5
+- Review CBD 
+  - Its use on semantic-ui-react vs material design
+  - Wonder if it's possible to do theming
+  - Look at the authentication on AWS
+
+- Common theme in any application - requires user authentication and management of profiles.  Possibly oauth
+- Add githook to test prior to commit
+- Add integration/functional test prior to deployment as part of git hook on the github
+
+2.10.2021
+
+- Done:
+  Deployed the app to carbon.domanic.io on netlify
+  Looks like the CBD is still up and running based on AWS app function
+
+- Forget redux.  Looks like zustand is much more simple and robust way to go using the React Hook
+- Created a dev branch.  So I can affect the change.
+- Looks like netlify doesn't have a good environment management system.
+
+Learning about intercom
+Learning about cypress.io
+Amazing stuff.
+
+
+2.12.2021
+- Reviewed styled-components vs semantic-ui ...  
+  Wanted to see how to structure the app for both native and web experience.
+  Looks like I need to focus on CSS for the web first.
+- Menu 
+
+
+2.13.2021
+- Intro to Adobe Photoshop
+- Back to studying django
+
+
+2.26.2021
+After two weeks...seems like I forgot what I am doing.  So I'll need to revive this project.  It's going to be a trading/todo/research management application.  So I can track my investment thesis and control my sentiment.  Last week, I earned 10K.  Actually it went up to 40K.  I think I should be able to do this full time and develop my own startup company.  
+
+First thing is that this needs to be very simple...so I can focus.  
+
+Ok...I removed the registration form on the dev branch...rebuilt the docker image and now the application is running back up.
+
+I reviewed the store/usersslice....but it is still fuzzy.  I am going to create a rudimentary django with custom user form and serve graphql.  
+
+I am going to host the backend on AWS for django.  and use cloudformation for RDS and s3 with cloudfront for react frontend.  
+
+Before I productionize this, I'll just use my local dev machine and figure out how to protect ngrok.
+
+Use ngrok next week get the functionality up and running.  
+
+dashboard.ngrok.com
+
+Before I introduce graphql, I'm going to look at how JWT actually work in the very simple usecase.  https://hackernoon.com/110percent-complete-jwt-authentication-with-django-and-react-2020-iejq34ta
+
+I love the fact that I can do most of copying pasting without leaving the keyboard.
+My goal next week is to work on authentication on the article above with some custom user changes in django and follow through react.
+Another thought.  Secure and encrypted communication without leaving any trace.  It should allow file transfers along with real-time chats.
+
+
+Ok the author just nailed it.  How to properly manage market events without getting distracted and agitated.  
+1. Strategic avoidance
+2. Healthy moderate use.
+
+I dont believe there's a such thing as a healthy moderate use.  Like smoking.
+
+I want my app to interrupt me when I should be interupted.  Based on what I'm engaged.  
+
+Bpdy is important as the mind...or concentration..focus...self discipline...and action.  
+
+In addition to reducing the distraction.  How about time management piece.
+
+Practice of using time in a way that maximizes produtiity and efficiency.  For example...reading at night..after the market close.
+
+I am going to deploy something new today.
+
+2.27.2021
+
+I worked on the backend django rest api for user authentication/registration.
+
+Then I switched to the frontend only to get hammered with material design bootstrap react ui library.  I'll need to get a better handle on the bootstrap then move on the material design components.
+Created a logon screen...then user registration....with forms.  This is going to get really complicated so I will learn about it tomorrow from the scratch.
+
+2.28.2021
+
+TODO:  Using the portfolio website and create a react side of it.
+This will help me familiarize with material design...
+Stretch goal.  Deploy carbon reactor with logon screen
+
+
+I tried it from scratch...loooks like it's broken.  It'd be nice to look at how they converted the components...source code.
+
+
+3.1.2021
+
+Didn't do any programming today.  But I did create the login and registration screen yesterday.  
+
+Tomorrow. Back on the django jwt authentication project.  This week, do everything on the graphql  
+
+A critical component to this is realtime chat/communication on the stock thesis.  And based on that to draw conviction.  Maybe interface with stocktwits.com  
+
+But for now, I like that my sister and I was able to articulate the conviction, fears, uncertainty and doubts....
+
+Life in a day was kinda amazing.  
+
+Today, the stocks went mostly sideways.  Gained about 2-3K while it was down 8K over the weekend.  Fairly optimistic tomorrow...to make some money.  My goal is to make 10K per week.  
+
+
+3.19.2021 
+
+It's been a while since I coded.  I made over 22k on a single options trading with rocket.  and since then I've lost all of my portfolio on options.  
+
+I am going to trade now based on signals from tiblio and lock in my risk. 
+
+1st.  Download the data of all the data from tiblio every time there's an update.  Correlate Long calls with selling puts.  that would be a strong buy signal.   
+
+I wonder if I can generate scripts on tradingview.  I am going to focus on this going forward.  
+
+Write an ETL python routine.  
+
+
+- time to refactor the code.  Finished the first piece of inputing short puts.  Make it into a class.
+
+3.20.2021
+
+Refactored the code.  Dedupe on insert.  Downloading all the data from tiblio except the earnings report.
+
+3.22.2021
+Setup a django backend and webhook for finnhub
+Completed realtime stock trading data from finnhub
+Researched kafka 
+
+I am going to do research on event stream processing now that I am getting incredible amount of realtime data from finnhub
+I'll need to start sketching out the front-end of the carbon reactor.  Write documentation on the project.
+There are millions of website that gives out analytics on options.
+
+- Learn about influxdb and see if other types of timeseries database.  
+- Learn about grafana and react integration
+
+
+3.23.2021
+- Setup kafka as integration point for the streamer and tiblio and other signals.
+
+A. Tiblio will produce four topics:  short puts, long calls/puts, short credit spreads, earnings plays
+B. finstreamer will consume the tiblio topics, and produce 1 topic:  trades 
+C. InfluxDB will consume Tiblio and Finstreamer topics.
+  1. This I need to think about...
+  2. Option Strategy as the book says...selling options like an engineer.
+  3. Just the mechanics of Wheeling strategy...and see how that works by collecting premiums.
+
+Initial goal of this application is a private fund management tool.
+UI should have instrumentations based on Grafana/Prometheus (not sure what Prometheus will do...)
+But my goal for today is:
+1. Setting up Kafka Python consumer/producer
+2. Set up InfluxDB
+3. Docker Log Rotation
+
+Look at how threading work in python so I can handle peer reset connection errors more robustly.  <-- This could be handled by Kubernetes.
+It should give a good indication of probability of loss/profit.  Study autocorrelation for time series data.
+
+
+3.24.2021
+- Start work on frontend.  Need to create a websocket server to stream info from kafka topics to react frontend.
