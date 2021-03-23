@@ -1,3 +1,4 @@
+import json
 from dbaccess import DBAcess
 import sys
 
@@ -11,6 +12,7 @@ import csv
 import codecs
 from dateutil.parser import parse
 import time
+from kafka import KafkaProducer
 
 class TiblioScraper:
 
@@ -20,6 +22,10 @@ class TiblioScraper:
         self.last_updated_long_calls_puts = {"CALLS": datetime(2001,1,1), "PUTS": datetime(2001,1,1)}
         self.last_updated_short_credit_spreads = datetime(2001,1,1)
         self.db = DBAcess()
+        self.producer = KafkaProducer(
+                value_serializer=lambda m: json.dumps(m).encode('utf-8'),
+                bootstrap_servers=CONST.KAFKA_BROKER
+                )
 
     def __signon(self):
         s = requests.session()
@@ -173,6 +179,14 @@ class TiblioScraper:
         # TODO: work on earnings report.  Should be very similar to long_calls_puts
         pass
 
+    def _get_securities_of_interest(self):
+        return None
+
+    def signal_market_data(self):
+        symbols = self._get_securities_of_interest()
+        if symbols is not None:
+            self.producer.send(CONST.TOPIC_LONG_CALLS_PUTS, value=symbols)    
+
     
 def run(argv) -> None:
     scraper = TiblioScraper()
@@ -184,7 +198,7 @@ def run(argv) -> None:
             scraper.load_long_puts()
             # TODO: put unittest automatically regression test upon save
             # scraper.load_earnings_report()
-            # TODO: load market open schedule from somewhere and adjust the loading frequency.
+            scraper.signal_market_data()
         except Exception as e:
             print(e)
 

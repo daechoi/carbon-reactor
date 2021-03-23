@@ -8,7 +8,7 @@ producer = KafkaProducer(
         )
 
 producer.send(
-        CONST.TOPIC_TRADES, value={"hello":"producer"}
+        CONST.TOPIC_LONG_CALLS_PUTS, value={"securities":["BINANCE:BTCUSDT"]}
         )
 
 producer.flush()

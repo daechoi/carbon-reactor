@@ -32,6 +32,7 @@ class Setting:
         self.FINHUB_API = os.getenv("FINHUB_API","")
         self.URL_FINNHUB_WS_API = os.getenv("URL_FINNHUB_WS_API","")
 
+        self.KAFKA_BROKER='localhost:9092'
         self.TOPIC_TRADES = os.getenv("TOPIC_TRADES")
         self.TOPIC_SHORT_PUTS = os.getenv("TOPIC_SHORT_PUTS")
         self.TOPIC_SHORT_CREDIT_SPREADS = os.getenv("TOPIC_SHORT_SHORT_CREDIT_SPREADS")

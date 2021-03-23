@@ -13,7 +13,7 @@ class FinStreamer(threading.Thread):
         self.daemon = True
         self.producer = KafkaProducer(
                 value_serializer=lambda m: json.dumps(m).encode('utf-8'),
-                bootstrap_servers='localhost:9092'
+                bootstrap_servers=CONST.KAFKA_BROKER
                 )
 
     def run(self):
@@ -99,8 +99,8 @@ if __name__ == "__main__":
             )
 
     for m in consumer:
-        print(f"Restarting with new interest {m}")
-        symbols = m.value
+        print(f"Restarting with new interest {m.value['securities']}")
+        symbols = m.value['securities']
         iex.stop()
         time.sleep(1)
         iex = FinStreamer(symbols)
