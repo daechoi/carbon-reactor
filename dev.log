@@ -186,3 +186,35 @@ It should give a good indication of probability of loss/profit.  Study autocorre
 
 3.24.2021
 - Start work on frontend.  Need to create a websocket server to stream info from kafka topics to react frontend.
+
+3.26.2021 - 4:21am
+- Can't believe two days have gone by.  Learned alot and finalized and deployed authentication and graphql-shield authorization on graphql
+So much better to just do it with prisma and nexus rather than using django.
+This is serverless technology.  Only server is the database which runs on my laptop using ngrok.
+
+Password-less authentication.  Very nice...
+
+I need to make registration, setup profile
+
+I can have multiple tunnels with ngrok.  
+So that I can serve kafka client, realtime websockets, postgres.  https://stackoverflow.com/questions/25522360/ngrok-configure-multiple-port-in-same-domain
+
+using ngrok service as an alternative for ssh reverse proxy...kinda amazing...for millions of nodes.  Terminate using TLS Certificates.
+
+study ngrok.  This is amazing.  Authoriation check interval
+https://ngrok.com/docs/ngrok-link#oauth-auth-check-interval
+
+
+Developed windtunnel....developed kafka service.  Developed docker-compose and kubernetes to restart the docker services.
+web sockets on python
+Developed vim.  
+
+Set up a github profile...
+
+Look at this cool real time shit  https://grafana.com/grafana/plugins/yesoreyeram-boomtable-panel/
+Learn about grafana
+https://grafana.com/tutorials/grafana-fundamentals/
+
+How about the app being named FU
+
+Dynamic trading app mockup...kind of amazing.
