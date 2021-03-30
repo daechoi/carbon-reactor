@@ -92,12 +92,14 @@ if __name__ == "__main__":
     iex = FinStreamer(symbols)
     iex.start()
 
+    # This code here is always blocking and runs as a daemon
     consumer = KafkaConsumer(
             CONST.TOPIC_LONG_CALLS_PUTS,
             value_deserializer=lambda m: json.loads(m.decode('utf-8')),
             bootstrap_servers='localhost:9092'
             )
 
+    # This would only run if there's a message
     for m in consumer:
         print(f"Restarting with new interest {m.value['securities']}")
         symbols = m.value['securities']
