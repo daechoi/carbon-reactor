@@ -42,6 +42,8 @@ services:
     image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
+    networks:
+      - test_net
 
   kafka:
     image: confluentinc/cp-kafka:latest
@@ -54,6 +56,8 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_BROKER_ID: 1
+    networks:
+      - test_net
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:

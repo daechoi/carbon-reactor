@@ -8,8 +8,10 @@ class Setting:
     def __init__(self):
         if os.getenv("environment") == "docker":
             env_path = Path("..") / '.env.docker'
+            self.KAFKA_BROKER='kafka:19092'
         else:
             env_path = Path("..") / '.env.production'
+            self.KAFKA_BROKER='localhost:9092'
 
         load_dotenv(dotenv_path=env_path)
         load_dotenv(dotenv_path=Path("..") / 'env.kafka')
@@ -32,7 +34,6 @@ class Setting:
         self.FINHUB_API = os.getenv("FINHUB_API","")
         self.URL_FINNHUB_WS_API = os.getenv("URL_FINNHUB_WS_API","")
 
-        self.KAFKA_BROKER='localhost:9092'
         self.TOPIC_TRADES = os.getenv("TOPIC_TRADES")
         self.TOPIC_SHORT_PUTS = os.getenv("TOPIC_SHORT_PUTS")
         self.TOPIC_SHORT_CREDIT_SPREADS = os.getenv("TOPIC_SHORT_SHORT_CREDIT_SPREADS")
