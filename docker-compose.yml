@@ -1,22 +1,6 @@
 version: '3.7'
 
 services:
-  frontend:
-    container_name: frontend
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    volumes:
-      - './frontend:/app'
-      - '/app/node_modules'
-    ports:
-      - 4000:4000
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-      - PORT=4000
-    env_file:
-      - ./frontend/.env.staging
-
   db:
     image: postgres:12
     env_file:
@@ -28,6 +12,11 @@ services:
       - ./db/:/docker-entrypoint-initdb.d/
     networks:
       - test_net
+    logging:
+      driver: "json-file"
+      options: 
+        max-file: "5"
+        max-size: "10m"
 
   data_service:
     build:
@@ -37,6 +26,14 @@ services:
       - test_net
     environment:
       - environment=docker
+    logging:
+      driver: "json-file"
+      options: 
+        max-file: "5"
+        max-size: "10m"
+    depends_on:
+      - db
+      - kafka
 
   zookeeper:
     image: wurstmeister/zookeeper
@@ -44,7 +41,12 @@ services:
       - "2181:2181"
     networks:
       - test_net
-
+    logging:
+      driver: "json-file"
+      options: 
+        max-file: "5"
+        max-size: "10m"
+ 
   kafka:
     image: confluentinc/cp-kafka:latest
     ports:
@@ -62,7 +64,12 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - zookeeper
-
+    logging:
+      driver: "json-file"
+      options: 
+        max-file: "5"
+        max-size: "10m"
+ 
 volumes:
   db-data:
 
