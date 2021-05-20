@@ -33,15 +33,16 @@ class DBAcess:
             credit,
             maxloss,
             created,
-            link
+            link,
+            trade_link
         )
-        values(%s, %s, %s, %s, %s, %s, cast(right(replace(%s,',',''),-1) as float4), cast(right(replace(%s,',',''),-1) as float4), %s, %s) """
+        values(%s, %s, %s, %s, %s, %s, cast(right(replace(%s,',',''),-1) as float4), cast(right(replace(%s,',',''),-1) as float4), %s, %s, %s) """
         self._insert_cmd(sql_insert, reader)
 
     def insert_credit_spreads(self,reader):
         sql_insert = """INSERT INTO public.staging_credit_spreads
-            (txn, symbol, expiration, put_call, short_strike, long_strike, initial_stock_price, pop, credit, maxloss, created, link)
-            VALUES(%s, %s, %s, %s, %s, %s, %s, %s,  cast(right(replace(%s,',',''),-1) as float4), cast(right(replace(%s,',',''),-1) as float4), %s, %s) """
+            (txn, symbol, expiration, put_call, short_strike, long_strike, initial_stock_price, pop, credit, maxloss, created, link, trade_link)
+            VALUES(%s, %s, %s, %s, %s, %s, %s, %s,  cast(right(replace(%s,',',''),-1) as float4), cast(right(replace(%s,',',''),-1) as float4), %s, %s, %s) """
 
         self._insert_cmd(sql_insert, reader)
 
