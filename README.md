@@ -1,6 +1,6 @@
 # carbon-reactor
 
-Diamond Hand Trading support app
+Diamond Hand Trading Analytics Tool for Options
 
 # to install
 
